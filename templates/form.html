@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foot Pressure Report</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('detailsForm');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Function to load graph
+        function loadGraph() {
+            const graphImage = document.getElementById('graphImage');
+            graphImage.src = "/generate_graph";
+        }
+    </script>
+</head>
+<body onload="loadGraph()">
+    <div class="home-screen">
+        <header>
+            <div class="header-content">
+                <div class="header-title">
+                    Foot Pressure Report
+                </div>
+            </div>
+        </header>
+
+        <main class="main-section">
+            <div class="main-patient-data">
+                <div class="main-toggle-button">
+                    <button onclick="toggleForm()" class="open-button">Enter Details</button>
+                </div>
+
+                <div class="patient-data">
+                    <form id="detailsForm" action="/generate_pdf" method="post" style="display: none;">
+                        <div class="bio-data">
+                            <div class="patient-name-info">
+                                <div class="name">
+                                    <label for="name">Name:</label>
+                                </div>
+                                <div class="patient-name-type" id="text-box">
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                            </div>
+            
+                            <div class="patient-age-info">
+                                <div class="patient-age-info-heading">
+                                    <label for="age">Age:</label>
+                                </div>
+                                <div class="patient-age-info-type" id="text-box">
+                                    <input type="number" id="age" name="age" required>
+                                </div>
+                            </div>
+                            
+                            <div class="patient-gender-info">
+                                <div class="patient-gender-info-heading">
+                                    <label for="gender">Gender:</label>
+                                </div>
+                                <div class="patient-gender-info-type">
+                                    <select id="gender" name="gender" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="patient-report-download">
+                            <button type="submit">Generate PDF Report</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="graph-section">
+                <img id="graphImage" src="" alt="Foot Pressure Graph">
+            </div>
+        </main>
+    </div>
+</body>
+</html>
